@@ -139,7 +139,7 @@ $(document).on("click", "#show_v", function(){
     s = "<span align=left style='font-size: 24px; width:100%; display: inline-block;'>Showing 24 future predictions for each context video (context frames highlighted in blue)</span><br><br>"
     
     for(i = 0; i < 30; i++) {
-        s = s+"<video autoplay loop muted style='width: 24.5%' class='video'><source src='vid_pred/" + parseInt(((cur)*6 %24 + 6)%24) + "_" + parseInt(i) + ".mp4' type='video/mp4'></video>";
+        s = s+"<video autoplay loop muted style='width: 24.5%' class='video'><source src='data/vid_pred/" + parseInt(((cur)*6 %24 + 6)%24) + "_" + parseInt(i) + ".mp4' type='video/mp4'></video>";
     }
     $('#container0').append(s);
     cur += 1;
@@ -154,7 +154,7 @@ $(document).on("click", "#show_attn", function(){
     // $('#container2').empty();
     s = ""
     for(i = 0; i < 32; i++) {
-        s = s+"<video  controls controlsList='' oncontextmenu='return true;' autoplay loop muted style='width:49.0%' class='video'><source src='attn_vis/rattn_maxmean_" + parseInt((i)) + "_0.mp4' type='video/mp4'></video>";   
+        s = s+"<video  controls controlsList='' oncontextmenu='return true;' autoplay loop muted style='width:49.0%' class='video'><source src='data/attn_vis/rattn_maxmean_" + parseInt((i)) + "_0.mp4' type='video/mp4'></video>";   
     }
     $('#container0').append(s);
     document.querySelector('video').playbackRate = 2;
