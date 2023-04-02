@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>RIN</title>
+</head>
+    
+<style>
+
+<body style="background-color:black;" >
+
+.videos {
+    position: absolute;
+    left: 0px;
+    display: grid;
+    grid-template-columns: repeat(3);
+}
+.video {
+    width: calc(100%);
+    margin-left: 0.1%;
+    margin-right: 0.1%;
+}
+
+.leftright{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+
+}
+
+.left{
+        width: 49.85%;
+        height: 100%;            
+        position: absolute;
+        left: 0;
+        opacity: 0.8;  /* for demo purpose  */
+} 
+.right{
+        width: 49.85%;
+        position: absolute;
+        right: 0;
+        opacity: 0.8;  /* for demo purpose  */
+        vertical-align: 128%;
+
+} 
+    
+.box{
+        width: 100%;
+        height: 100%;            
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.8;  /* for demo purpose  */
+}
+.stack-top{
+        z-index: 9;
+        margin-left: calc(25%);
+        top: calc(25%);
+        color: black;
+        opacity: 0.8;  /* for demo purpose  */
+        width: 50%;
+        height: 50%;            
+        background-color: white;
+        font-size: 40px;
+        text-align: center;
+
+}
+
+h1{
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+h3{
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+
+</style>
+    
+
+    
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    var timer;
+    var seconds = 4; // how often should we refresh the DIV?
+    var t = 0;
+    jQuery.fn.pop = [].pop
+    var vidcols = 2;
+    var n = 6*vidcols;
+
+    // s = ""
+    // for(i = 1; i < 2; i++) {
+    //     s = s+"<video  autoplay loop muted style='width:100%' class='video'><source src='attn_vis/" + parseInt((i)) + "_1.mp4.mp4' type='video/mp4'></video>";   
+    // }
+    // $('#container2').append(s);
+
+    // s = ""
+    // for(i = 0; i < 24; i++) {
+    //     s = s+"<video autoplay loop muted class='video'><source src='vid_pred/" + parseInt((i)*6 %150) + "_" + parseInt(t%30) + ".mp4' type='video/mp4'></video>";
+    // }
+    // $('#container1').append(s);
+    
+    // function startActivityRefresh() {
+    //     timer = setInterval(function() {
+    //       t = t+1;
+    //         for (i = 0; i < vidcols; i++) {
+    //         s = "<video autoplay loop muted class='video'><source src='vid_pred/" + parseInt((i*(t%30))*6 %150) + "_" + parseInt(t%30) + ".mp4' type='video/mp4'></video>";
+    //             $("#container1 :nth-child(" + parseInt(i+1) + ")").remove();
+    //             $('#container1').append(s);
+    //       }
+    //       s = ""
+    //       for(i = 0; i < vidcols; i++) {
+    //       }
+            
+    //     }, seconds*1000)
+    // }
+    
+
+    // function cancelActivityRefresh() {
+    //     clearInterval(timer);
+    // }
+    // $(function() {
+    //     startActivityRefresh();
+    // });
+    
+    
+    $(".video").map(function() {
+       this.currentTime = 2;
+    }).get(); 
+
+    $('#show_attn').trigger('click');
+
+});
+
+var cur = 0;
+$(document).on("click", "#show_v", function(){
+    $('#container0').empty();
+    // $('#container1').empty();
+    // $('#container2').empty();
+    s = "<span align=left style='font-size: 24px; width:100%; display: inline-block;'>Showing 24 future predictions for each context video (context frames highlighted in blue)</span><br><br>"
+    
+    for(i = 0; i < 30; i++) {
+        s = s+"<video autoplay loop muted style='width: 24.5%' class='video'><source src='vid_pred/" + parseInt(((cur)*6 %24 + 6)%24) + "_" + parseInt(i) + ".mp4' type='video/mp4'></video>";
+    }
+    $('#container0').append(s);
+    cur += 1;
+    document.querySelector('video').playbackRate = 0.5;
+
+});
+
+
+$(document).on("click", "#show_attn", function(){
+    $('#container0').empty();
+    // $('#container1').empty();
+    // $('#container2').empty();
+    s = ""
+    for(i = 0; i < 32; i++) {
+        s = s+"<video  controls controlsList='' oncontextmenu='return true;' autoplay loop muted style='width:49.0%' class='video'><source src='attn_vis/rattn_maxmean_" + parseInt((i)) + "_0.mp4' type='video/mp4'></video>";   
+    }
+    $('#container0').append(s);
+    document.querySelector('video').playbackRate = 2;
+});
+
+// $(document).on("click", "#show_image", function(){
+//     console.log('hello')
+//     $('#container0').empty();
+//     $('#container0').append(`
+//     ImageNet 1024x1024
+//         <div><img style=' width:49%; margin-bottom:10px' src='imagenet/14.jpg'></img></div>
+//             ImageNet 768x768
+//         <div><img style=' width:49%; margin-bottom:10px' src='imagenet/13.jpg'></img></div>
+//     </div>`)
+
+// });
+
+
+// var cur = -1
+// $(document).mousemove(function(event) {
+// $(".video").map(function() {
+//     if (cur < 0) {this.currentTime}
+//     if ((event.pageX-cur) > 3 || (event.pageX-cur) -3) {
+//        this.currentTime = event.pageX / 100.0;
+//         console.log(event.pageX)
+//     }
+//     cur = event.pageX
+//     }).get()      
+// })
+
+</script>
+                           
+<!--
+<div class="box stack-top">
+
+</div>-->
+<!-- <div class="box"> -->
+<center>
+<div style="top:0%; height:30%; width:100%;   text-align: left;">
+    <div style="font-size: 32pt; width:40%; float: left; ">
+        <h1 align="center" style="width: 40%; float: left; ">RIN </h1>
+    <!-- </div>
+    <div style="font-size: 24pt; width:40%; float: left; "> -->
+        <h3><table align="center" style="float: left">
+            <tr>
+                <td><span style="font-size:16pt"><a id="show_attn" href="#">Attention</a></span></td>
+            </tr>
+            <tr>
+                <td><span style="font-size:16pt"><a id="show_v" href="#">Video Prediction (click for more)</a></span></td>
+            </tr>
+        </table></h3>
+    </div>
+    <!-- <div style="width:50%; height:50%; right:0%; margin-top: 2%; margin-right: 10%; position: absolute;"> <img style='height:100%; opacity:100%;' src='animation.gif'></img></div> -->
+</div>
+<!-- </div> -->
+
+<div style="top:18%; position:absolute; height:100%; width:100%">
+    <div id="container0" class="videos">
+
+    </div>
+
+</div>
+</center>
+</body>
+</html>
